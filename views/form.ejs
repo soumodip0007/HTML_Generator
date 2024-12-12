@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML Generator Form</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <form
+      action="/generate"
+      method="POST"
+      enctype="multipart/form-data"
+      id="mainForm"
+    >
+      <label for="title">Add Page Title:</label>
+      <input type="text" id="title" name="title" required /><br /><br />
+
+      <div id="dynamicFields">
+        <fieldset>
+          <legend>Heading Section</legend>
+          <label for="heading">Select Heading Level:</label>
+          <select id="heading" name="headingLevel[]" required>
+            <option value="h1">H1</option>
+            <option value="h2">H2</option>
+            <option value="h3">H3</option>
+            <option value="h4">H4</option></select
+          ><br /><br />
+
+          <label for="headingText">Add a Heading Text:</label>
+          <input
+            type="text"
+            id="headingText"
+            name="headingText[]"
+            required
+          /><br /><br />
+        </fieldset>
+
+        <fieldset>
+          <legend>Paragraph Section</legend>
+          <label for="paragraphText">Add a Paragraph Text:</label><br />
+          <textarea
+            id="paragraphText"
+            name="paragraphText[]"
+            rows="5"
+            cols="30"
+            required
+          ></textarea
+          ><br /><br />
+
+          <label for="imageUpload">Upload an Image:</label>
+          <input
+            type="file"
+            id="imageUpload"
+            name="images[]"
+            accept="image/*"
+            required
+          /><br /><br />
+        </fieldset>
+      </div>
+
+      <button type="button" id="addSection">
+        Add Another Heading, Paragraph and Image</button
+      ><br /><br />
+      <button type="submit">Generate HTML</button>
+      <a href="https://github.com/soumodip0007" target="_blank">Github Link</a>
+    </form>
+
+    <script>
+      document.getElementById("addSection").addEventListener("click", () => {
+        const dynamicFields = document.getElementById("dynamicFields");
+        const newSection = document.createElement("div");
+        newSection.innerHTML = `
+        <fieldset>
+          <legend>Heading Section</legend>
+          <label for="heading">Heading Level:</label>
+          <select id="heading" name="headingLevel[]" required>
+            <option value="h1">H1</option>
+            <option value="h2">H2</option>
+            <option value="h3">H3</option>
+            <option value="h4">H4</option>
+          </select><br><br>
+
+          <label for="headingText">Heading Text:</label>
+          <input type="text" id="headingText" name="headingText[]" required><br><br>
+        </fieldset>
+
+        <fieldset>
+          <legend>Paragraph Section</legend>
+          <label for="paragraphText">Paragraph Text:</label><br>
+          <textarea id="paragraphText" name="paragraphText[]" rows="5" cols="30" required></textarea><br><br>
+
+          <label for="imageUpload">Upload an Image:</label>
+          <input type="file" id="imageUpload" name="images[]" accept="image/*" required><br><br>
+        </fieldset>
+      `;
+        dynamicFields.appendChild(newSection);
+      });
+    </script>
+  </body>
+</html>
